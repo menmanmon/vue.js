@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="display">
-      <input v-model="operand1" />
-      <input v-model="operand2" />
+      <input v-model.number="operand1" />
+      <input v-model.number="operand2" />
       = {{ result }}
     </div>
     <div class="keyboard">
