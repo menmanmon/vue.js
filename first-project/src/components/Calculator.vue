@@ -31,7 +31,7 @@
         >
           {{ digit }}
         </button>
-        <button @click="deliteDigit">&#129040;</button>
+        <button @click="deliteDigit()">&#129040;</button>
         <br />
         <input type="radio" id="one" value="operand1" v-model="picked" />
         <label for="one">Операнд 1</label>
@@ -85,8 +85,10 @@ export default {
     deliteDigit() {
       switch (this.picked) {
         case "operand1":
+          this.operand1 = this.operand1.slice(0, -1);
           break;
         case "operand2":
+          this.operand2 = this.operand2.slice(0, -1);
           break;
       }
     },
