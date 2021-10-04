@@ -19,6 +19,7 @@
 import PaymentsDisplay from "./components/PaymentsDisplay";
 import AddPaymentForm from "./components/AddPaymentForm";
 import ButtonForAdd from "./components/ButtonForAdd";
+import { mapMutations } from "vuex";
 
 export default {
   components: {
@@ -61,9 +62,10 @@ export default {
     openOnClick(clicked) {
       this.clicked = clicked;
     },
+    ...mapMutations("payments", ["setPaymentsListData"]),
   },
   created() {
-    this.paymentsList = this.fetchData();
+    this.setPaymentsListData(this.fetchData());
   },
 };
 </script>
