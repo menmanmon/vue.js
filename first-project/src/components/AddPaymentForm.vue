@@ -8,13 +8,9 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
-  props: {
-    paymentsList: {
-      type: Array,
-      default: () => [],
-    },
-  },
   data() {
     return {
       date: "",
@@ -31,16 +27,19 @@ export default {
       const y = today.getFullYear();
       return `${d}.${m}.${y}`;
     },
+    ...mapGetters("payments", ["getPaymentsList"]),
   },
   methods: {
+    ...mapMutations("payments", ["addDataToPaymentsList"]),
     onSaveClick() {
       const data = {
         value: +this.value,
         category: this.category,
         date: this.date || this.getCurrentDate,
-        id: this.paymentsList.length + 1,
+        id: this.getPaymentsList.length + 1,
       };
-      this.$emit("addNewPayment", data);
+      this.addDataToPaymentsList(data);
+      this.date = this.value = this.category = "";
     },
   },
 };

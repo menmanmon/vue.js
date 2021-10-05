@@ -5,12 +5,8 @@
     </header>
     <main>
       <ButtonForAdd @openOnClick="openOnClick" />
-      <AddPaymentForm
-        :paymentsList="paymentsList"
-        v-if="clicked"
-        @addNewPayment="addNewPayment"
-      />
-      <PaymentsDisplay :items="paymentsList" />
+      <AddPaymentForm v-if="clicked" />
+      <PaymentsDisplay />
     </main>
   </div>
 </template>
@@ -19,7 +15,7 @@
 import PaymentsDisplay from "./components/PaymentsDisplay";
 import AddPaymentForm from "./components/AddPaymentForm";
 import ButtonForAdd from "./components/ButtonForAdd";
-import { mapMutations } from "vuex";
+import { mapMutations, mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -34,38 +30,17 @@ export default {
     };
   },
   methods: {
-    fetchData() {
-      return [
-        {
-          id: 1,
-          date: "28.03.2020",
-          category: "Food",
-          value: 169,
-        },
-        {
-          id: 2,
-          date: "24.03.2020",
-          category: "Transport",
-          value: 360,
-        },
-        {
-          id: 3,
-          date: "24.03.2020",
-          category: "Food",
-          value: 532,
-        },
-      ];
-    },
-    addNewPayment(data) {
-      this.paymentsList = [...this.paymentsList, data];
-    },
     openOnClick(clicked) {
       this.clicked = clicked;
     },
     ...mapMutations("payments", ["setPaymentsListData"]),
+    ...mapActions("payments", ["fetchData"]),
+  },
+  computed: {
+    ...mapGetters("payments", ["getPaymentsList"]),
   },
   created() {
-    this.setPaymentsListData(this.fetchData());
+    this.fetchData();
   },
 };
 </script>

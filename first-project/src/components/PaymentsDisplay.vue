@@ -6,7 +6,7 @@
       <div class="thirdColumn">Category</div>
       <div class="fourthColumn">Value</div>
     </div>
-    <div class="tableRow" v-for="item in items" v-bind:key="item.id">
+    <div class="tableRow" v-for="item in allPayments" v-bind:key="item.id">
       <div class="firstColumn">{{ item.id }}</div>
       <div class="secondСolumn">{{ item.date }}</div>
       <div class="thirdColumn">{{ item.category }}</div>
@@ -19,14 +19,11 @@
 import { mapGetters } from "vuex";
 
 export default {
-  props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
-  },
-  methods: {
+  computed: {
     ...mapGetters("payments", ["getPaymentsList"]),
+    allPayments() {
+      return this.getPaymentsList;
+    },
   },
 };
 </script>
