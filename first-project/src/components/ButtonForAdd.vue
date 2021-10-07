@@ -4,10 +4,11 @@
 
 <script>
 export default {
-  data() {
-    return {
-      clicked: false,
-    };
+  props: {
+    clicked: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
     openOnClick() {

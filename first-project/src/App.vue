@@ -4,7 +4,7 @@
       <div><h2>My personal costs</h2></div>
     </header>
     <main>
-      <ButtonForAdd @openOnClick="openOnClick" />
+      <ButtonForAdd :clicked="clicked" @openOnClick="openOnClick" />
       <button class="fillFormButton" @click="addFoodValue200">Food 200</button>
       <button class="fillFormButton" @click="addTransportValue50">Transport 50</button>
       <button class="fillFormButton" @click="addEntertainmentValue2000">Entertainment 2000</button>
