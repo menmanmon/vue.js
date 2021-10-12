@@ -1,5 +1,5 @@
 <template>
-  <div v-if="formVisible" class="paymentForm">
+  <div class="paymentForm">
     <div>
       <select v-model="selected">
         <option
@@ -39,6 +39,9 @@ export default {
       this.selected = this.getRouteParams.name;
       this.value = this.getRouteParams.params?.value;
       this.date = this.getCurrentDate;
+      console.log(this.value);
+      console.log(this.selected);
+
     },
   },
   computed: {
@@ -69,7 +72,7 @@ export default {
         id: this.getPaymentsList.length + 1,
       };
       this.addDataToPaymentsList(data);
-      this.date = this.value = this.category = "";
+      // this.date = this.value = this.category = "";
       this.setFormVisible(false);
     },
     // getCoincidence() {

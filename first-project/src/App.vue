@@ -6,7 +6,7 @@
     <main>
       <BtnForOpenForm />
       <Links />
-      <AddPaymentForm />
+      <AddPaymentForm v-show="formVisible" />
       <PaymentsDisplay />
     </main>
   </div>
@@ -17,7 +17,7 @@ import PaymentsDisplay from "./components/PaymentsDisplay";
 import AddPaymentForm from "./components/AddPaymentForm";
 import BtnForOpenForm from "./components/BtnForOpenForm";
 import Links from "./components/Links";
-import { mapMutations, mapActions, mapGetters } from "vuex";
+import { mapMutations, mapActions, mapGetters, mapState } from "vuex";
 import { getCurrentDate } from "./assets/utils.js";
 
 export default {
@@ -40,6 +40,7 @@ export default {
   computed: {
     getCurrentDate,
     ...mapGetters("payments", ["getPaymentsList"]),
+    ...mapState("general", ["formVisible"]),
   },
   created() {
     this.fetchData();
