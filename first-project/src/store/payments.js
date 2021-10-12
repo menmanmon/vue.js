@@ -1,5 +1,6 @@
 const state = {
     paymentsList: [],
+    // disabled: false, //нужно для кнопки "Add new cost +", чтобы делать ее неактивной
 }
 
 const mutations = {
@@ -9,6 +10,9 @@ const mutations = {
     addDataToPaymentsList(state, payload) {
         state.paymentsList.push(payload)
     },
+    // makeBtnDisabled(state, payload) {
+    //     state.disabled = payload
+    // },
 }
 
 const getters = {
@@ -19,6 +23,7 @@ const getters = {
     getFullPaymentValue: state => {
         return state.paymentsList.reduce((res, cur) => res + cur.value, 0)
     },
+    // getStateDisabled: state => state.disabled,
 }
 
 const actions = {

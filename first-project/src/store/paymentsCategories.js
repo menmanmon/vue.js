@@ -20,7 +20,7 @@ const actions = {
         return new Promise((resolve) => {
             // имитируем работу с сетью
             setTimeout(() => {
-                resolve(['Food', 'Transport', 'Education', 'Entertainment'])
+                resolve(['food', 'transport', 'education', 'entertainment'])
             }, 1000);
         })
             .then(res =>
