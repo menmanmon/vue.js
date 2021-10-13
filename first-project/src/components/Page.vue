@@ -15,6 +15,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  name: "Page",
   computed: {
     ...mapGetters("payments", ["getPaymentsList"]),
     pages() {

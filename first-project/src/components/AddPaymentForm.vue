@@ -14,7 +14,9 @@
     <input class="inputValue" placeholder="Value" v-model="value" />
     <!-- <input class="inputCategory" placeholder="Category" v-model="category" /> -->
     <input class="inputDate" placeholder="Date" v-model="date" />
-    <button v-show="isEmpty" class="addButton" @click="onSaveClick">ADD +</button>
+    <button v-show="isEmpty" class="addButton" @click="onSaveClick">
+      ADD +
+    </button>
   </div>
 </template>
 
@@ -24,6 +26,7 @@ import { getCurrentDate } from "../assets/utils.js";
 import { quickBTNs } from "../assets/selects";
 
 export default {
+  name: "AddPaymentForm",
   data() {
     return {
       selected: "",

@@ -9,6 +9,7 @@ import { mapState, mapMutations } from "vuex";
 
 
 export default {
+  name: "BtnForOpenForm",
   computed: {
     ...mapState("general", ["formVisible"]),
   },
