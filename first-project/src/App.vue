@@ -6,7 +6,7 @@
     <main>
       <BtnForOpenForm />
       <Links />
-      <AddPaymentForm v-show="formVisible" />
+      <AddPaymentForm v-if="formVisible" />
       <PaymentsDisplay />
     </main>
   </div>
