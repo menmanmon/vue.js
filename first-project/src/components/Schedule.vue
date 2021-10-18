@@ -4,6 +4,7 @@
     <Links />
     <AddPaymentForm v-if="formVisible" />
     <PaymentsDisplay />
+    <Page />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import PaymentsDisplay from "../components/PaymentsDisplay";
 import AddPaymentForm from "../components/AddPaymentForm";
 import BtnForOpenForm from "../components/BtnForOpenForm";
 import Links from "../components/Links";
+import Page from "../components/Page";
 import { mapActions, mapState } from "vuex";
 
 export default {
@@ -21,7 +23,11 @@ export default {
     AddPaymentForm,
     BtnForOpenForm,
     Links,
+    Page,
   },
+  data: () => ({
+    page: 1,
+  }),
   methods: {
     ...mapActions("payments", ["fetchData"]),
   },
@@ -29,7 +35,7 @@ export default {
     ...mapState("general", ["formVisible"]),
   },
   created() {
-    this.fetchData();
+    this.fetchData(this.page);
   },
 };
 </script>

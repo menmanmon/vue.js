@@ -85,12 +85,10 @@ export default {
     },
     setParams() {
       if (this.getCoincidence()) {
-        console.log("ok " + this.$route.name);
         this.date = this.getCurrentDate;
         this.value = this.$route.params?.value;
         this.selected = this.$route.name;
       } else {
-        console.log("not ok " + this.$route.name);
         this.date = null;
         this.value = null;
         this.selected = null;
