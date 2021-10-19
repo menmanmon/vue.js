@@ -1,15 +1,8 @@
 <template>
   <div class="v-page">
-    <!-- <div
-      class="v-page__number"
-      v-for="(item, index) in pages"
-      :key="item"
-      @click="choosePage(index)"
-    >
-      {{ item }}
-    </div> -->
     <div
-      @click="clickHandler(index)"
+      class="v-page__number"
+      @click="showPaymentsOnDisplay(index)"
       v-for="(item, index) in pages"
       :key="index"
     >
@@ -19,49 +12,31 @@
 </template>
 
 <script>
-import { mapGetters, mapState, mapMutations } from "vuex";
-
+import { mapState, mapMutations } from "vuex";
 export default {
   name: "Page",
   computed: {
-    ...mapState("payments", ["paymentsList"]),
-    ...mapState("payments", ["activeList"]), //потом удалить
-    ...mapState("payments", ["fetchData"]), //потом удалить
-    ...mapState("payments", ["getActiveList"]), //потом удалить
-    ...mapGetters("payments", ["getPaymentsList"]),
+    ...mapState("payments", ["allPaymentsListAsArray"]),
     pages() {
-      return Math.ceil(this.makeArray.length / 5);
-    },
-    makeArray() {
-      return [].concat(...Object.values(this.paymentsList));
+      return Math.ceil(this.allPaymentsListAsArray.length / 5);
     },
   },
   methods: {
-    ...mapMutations("payments", ["setActiveList"]),
-    choosePage(page) {
-      this.$emit("choose-page", page);
-    },
-    clickHandler(page) {
-      console.log(`page: ${page}`);
-      console.log(this.paymentsList[`page${page + 1}`]);
-      console.log(`paymentsList: ${this.paymentsList}`);
-      console.log(`active: ${this.getActiveList}`);
-      this.setActiveList(this.paymentsList[`page${page + 1}`]);
-    },
+    ...mapMutations("payments", ["showPaymentsOnDisplay"]),
   },
 };
 </script>
 
 <style>
 .v-page {
-  cursor: pointer;
+  width: 500px;
   display: flex;
-  max-width: 500px;
-  width: 100%;
-  margin: 0 auto;
   justify-content: center;
+  margin: 10px 0;
+
 }
 .v-page__number {
+  cursor: pointer;
   margin: 0 10px;
 }
 </style>

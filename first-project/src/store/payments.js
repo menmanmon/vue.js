@@ -1,6 +1,8 @@
 const state = {
     paymentsList: [],
+    allPaymentsListAsArray: [],
     activeList: [],
+    page: 1,
 }
 
 const mutations = {
@@ -8,19 +10,25 @@ const mutations = {
         state.paymentsList = payload
         // Object.assign(state.paymentsList, payload)
     },
-    addDataToPaymentsList(state, payload) {
-        state.paymentsList.push(payload)
+    addDataToAllPaymentsListAsArray(state, payload) {
+        state.allPaymentsListAsArray.push(payload)
     },
-    setActiveList(state, data) {
-        state.activeList = data
+    setActiveList(state, payload) {
+        state.activeList = payload
+    },
+    makeArray(state, payload) {
+        state.allPaymentsListAsArray = [].concat(...Object.values(payload));
+    },
+    showPaymentsOnDisplay(state, payload) {
+        state.page = payload;
+        state.activeList = state.allPaymentsListAsArray.slice(payload * 5, (payload + 1) * 5);
     }
 }
 
 const getters = {
-    // получаем список paymentsList
     getPaymentsList: state => state.paymentsList,
     getActiveList: state => state.activeList,
-
+    getAllPaymentsListAsArray: state => state.allPaymentsListAsArray,
 }
 
 const actions = {
@@ -29,40 +37,10 @@ const actions = {
             .then(res => res.json())
             .then(response => {
                 commit("setPaymentsListData", response)
+                commit("makeArray", response)
                 if (page === 1) commit("setActiveList", response.page1)
             })
     }
-    // fetchData({ commit }) {
-    //     return new Promise((resolve) => {
-    //         // имитируем работу с сетью, ставим задержку получения данных в 1 секунду
-    //         setTimeout(() => {
-    //             resolve([
-    //                 {
-    //                     id: 1,
-    //                     date: '28.03.2020',
-    //                     category: 'Food',
-    //                     value: 169,
-    //                 },
-    //                 {
-    //                     id: 2,
-    //                     date: '24.03.2020',
-    //                     category: 'Transport',
-    //                     value: 360,
-    //                 },
-    //                 {
-    //                     id: 3,
-    //                     date: '24.03.2020',
-    //                     category: 'Food',
-    //                     value: 532,
-    //                 },
-    //             ])
-    //         }, 1000)
-    //     })
-    //         .then(res => {
-    //             // запускаем изменение состояния через commit
-    //             commit('setPaymentsListData', res)
-    //         })
-    // },
 }
 
 export default {

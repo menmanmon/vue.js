@@ -1,8 +1,14 @@
 <template>
   <div>
-    <BtnForOpenForm />
-    <Links />
-    <AddPaymentForm v-if="formVisible" />
+    <div class="topControl">
+      <div class="leftControl">
+        <BtnForOpenForm />
+        <Links />
+      </div>
+      <div class="addPaymentForm">
+        <AddPaymentForm v-if="formVisible" />
+      </div>
+    </div>
     <PaymentsDisplay />
     <Page />
   </div>
@@ -41,4 +47,12 @@ export default {
 </script>
 
 <style>
+.topControl {
+  display: flex;
+  min-height: 115px;
+  min-width: 500px;
+}
+.leftControl {
+  margin-right: 30px;
+}
 </style>

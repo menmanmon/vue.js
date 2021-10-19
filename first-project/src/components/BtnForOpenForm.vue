@@ -24,6 +24,7 @@ export default {
 
 <style>
 .openButton {
+  height: 22px;
   margin: 0 15px 10px 0;
 }
 </style>

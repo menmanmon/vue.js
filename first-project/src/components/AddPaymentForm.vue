@@ -12,7 +12,6 @@
       </select>
     </div>
     <input class="inputValue" placeholder="Value" v-model="value" />
-    <!-- <input class="inputCategory" placeholder="Category" v-model="category" /> -->
     <input class="inputDate" placeholder="Date" v-model="date" />
     <button v-show="isEmpty" class="addButton" @click="onSaveClick">
       ADD +
@@ -36,6 +35,7 @@ export default {
       id: 0,
     };
   },
+  //другая реализация
   // watch: {
   //   $route() {
   //     // способ отслеживания изменения роутинга
@@ -47,13 +47,15 @@ export default {
   //   },
   // },
   computed: {
-    ...mapGetters("payments", ["getPaymentsList"]),
+    ...mapState("payments", ["allPaymentsListAsArray"]),
     ...mapGetters("paymentsCategories", ["getCategoryList"]),
     ...mapState("general", ["formVisible"]),
+    ...mapState("payments", ["page"]),
     getCurrentDate,
     list() {
       return quickBTNs;
     },
+    //другая реализация
     // getRouteParams() {
     //   return {
     //     name: this.$route.name,
@@ -65,20 +67,21 @@ export default {
     },
   },
   methods: {
-    ...mapMutations("payments", ["addDataToPaymentsList"]),
-    ...mapMutations("paymentsCategories", ["setCategories"]),
+    ...mapMutations("payments", ["addDataToAllPaymentsListAsArray"]),
     ...mapActions("paymentsCategories", ["loadCategories"]),
     ...mapMutations("general", ["setFormVisible"]),
+    ...mapMutations("payments", ["showPaymentsOnDisplay"]),
     onSaveClick() {
       const data = {
         value: +this.value,
         category: this.selected,
         date: this.date || this.getCurrentDate,
-        id: this.getPaymentsList.length + 1,
+        id: this.allPaymentsListAsArray.length + 1,
       };
-      this.addDataToPaymentsList(data);
+      this.addDataToAllPaymentsListAsArray(data);
       this.date = this.value = this.category = "";
       this.setFormVisible(false);
+      this.showPaymentsOnDisplay(this.page);
     },
     getCoincidence() {
       return this.list.some((el) => el.category === this.$route.name);
@@ -108,7 +111,6 @@ export default {
 .paymentForm {
   display: flex;
   flex-direction: column;
-  width: 250px;
 }
 .paymentForm input {
   margin-bottom: 10px;
