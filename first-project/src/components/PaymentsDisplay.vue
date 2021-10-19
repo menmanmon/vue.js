@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table">
     <div class="tableRow tableHeader">
       <div class="firstColumn">№</div>
       <div class="secondСolumn">Date</div>
@@ -23,15 +23,14 @@ export default {
   computed: {
     ...mapState("payments", ["activeList"]),
     ...mapState("payments", ["paymentsList"]),
-  //   ...mapGetters("payments", ["getPaymentsList"]),
-  //   allPayments() {
-  //     return this.getPaymentsList;
-  //   },
   },
 };
 </script>
 
 <style scoped>
+.table{
+  min-height: 186px;
+}
 .tableRow {
   min-height: 30px;
   width: 500px;

@@ -40,13 +40,12 @@ export default {
 
 <style>
 .fillFormButton {
-  margin-right: 5px;
+margin: 2px 0;
 }
 
 .fillFormButton__container {
   display: flex;
-  flex-direction: row;
-  width: 500px;
+  flex-direction: column;
   justify-content: flex-start;
   margin-bottom: 10px;
 }
