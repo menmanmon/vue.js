@@ -39,7 +39,7 @@ const getters = {
 
 const actions = {
     fetchData({ commit }, page) {
-        fetch("https://raw.githubusercontent.com/manmanmon/vue.js/lesson_5/server/server.json")
+        fetch("https://raw.githubusercontent.com/manmanmon/vue.js/lesson_6/server/server.json")
             .then(res => res.json())
             .then(response => {
                 commit("setPaymentsListData", response)
