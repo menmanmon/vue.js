@@ -6,7 +6,7 @@
         <Links />
       </div>
       <div class="addPaymentForm">
-        <AddPaymentForm v-if="formVisible" />
+        <AddPaymentForm v-show="formVisible" />
       </div>
     </div>
     <PaymentsDisplay />

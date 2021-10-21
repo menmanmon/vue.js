@@ -27,6 +27,7 @@ import { quickBTNs } from "../assets/selects";
 
 export default {
   name: "AddPaymentForm",
+  props: ["item"],
   data() {
     return {
       selected: "",
@@ -37,16 +38,20 @@ export default {
     };
   },
   //другая реализация
-  // watch: {
-  //   $route() {
-  //     // способ отслеживания изменения роутинга
-  //     this.selected = this.getRouteParams.name;
-  //     this.value = this.getRouteParams.params?.value;
-  //     this.date = this.getCurrentDate;
-  //     console.log(this.value);
-  //     console.log(this.selected);
-  //   },
-  // },
+  watch: {
+    $route() {
+      // способ отслеживания изменения роутинга
+      if (this.$route.name === "edit") {
+        this.currentItem.category = this.item.category;
+        this.currentItem.value = this.item.value;
+        this.currentItem.date = this.item.date;
+      } else {
+        this.currentItem.category = this.getRouteParams.name;
+        this.currentItem.value = this.getRouteParams.params?.value;
+        this.currentItem.date = this.getCurrentDate;
+      }
+    },
+  },
   computed: {
     ...mapState("payments", ["allPaymentsListAsArray"]),
     ...mapGetters("paymentsCategories", ["getCategoryList"]),
@@ -61,12 +66,12 @@ export default {
       return this.$route.name === "edit";
     },
     //другая реализация
-    // getRouteParams() {
-    //   return {
-    //     name: this.$route.name,
-    //     params: this.$route.params,
-    //   };
-    // },
+    getRouteParams() {
+      return {
+        name: this.$route.name,
+        params: this.$route.params,
+      };
+    },
   },
   methods: {
     ...mapMutations("payments", ["addDataToAllPaymentsListAsArray"]),

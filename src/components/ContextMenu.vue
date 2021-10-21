@@ -32,7 +32,6 @@ export default {
       }
       if (this.$route.name === "edit") {
         this.setCurrentItem(this.item);
-        console.log(this.currentItem);
       }
       this.$modal.hide();
     },
