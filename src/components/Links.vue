@@ -26,14 +26,14 @@ export default {
   },
   methods: {
     ...mapMutations("general", ["setFormVisible"]),
+    ...mapMutations("payments", ["setCurrentItem"]),
     linkHandler(item) {
       const { category: name, params } = item;
       if (this.$route.name !== name) {
         this.$router.push({ name, params });
         this.setFormVisible(false);
-        console.log("item: " + name);
       }
-      
+      this.setCurrentItem(item);
     },
   },
 };
@@ -41,7 +41,7 @@ export default {
 
 <style>
 .fillFormButton {
-margin: 2px 0;
+  margin: 2px 0;
 }
 
 .fillFormButton__container {

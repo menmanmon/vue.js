@@ -2,7 +2,7 @@
   <div class="v-page">
     <div
       class="v-page__number"
-      @click="showPaymentsOnDisplay(index)"
+      @click="showPaymentsOnDisplay(item), defineCurrentPage(item)"
       v-for="(item, index) in pages"
       :key="index"
     >
@@ -17,12 +17,14 @@ export default {
   name: "Page",
   computed: {
     ...mapState("payments", ["allPaymentsListAsArray"]),
+    ...mapState("payments", ["numberОfLinesPerSheet"]),
     pages() {
-      return Math.ceil(this.allPaymentsListAsArray.length / 5);
+      return Math.ceil(this.allPaymentsListAsArray.length / this.numberОfLinesPerSheet);
     },
   },
   methods: {
     ...mapMutations("payments", ["showPaymentsOnDisplay"]),
+    ...mapMutations("payments", ["defineCurrentPage"]),
   },
 };
 </script>

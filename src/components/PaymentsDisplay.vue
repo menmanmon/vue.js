@@ -47,7 +47,6 @@ export default {
   methods: {
     onShown(params) {
       this.activeID = params.id;
-      // this.activeID = null
     },
     onHide() {
       this.activeID = null;

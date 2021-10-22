@@ -28,16 +28,15 @@ import { quickBTNs } from "../assets/selects";
 export default {
   name: "AddPaymentForm",
   props: ["item"],
-  data() {
-    return {
-      selected: "",
-      date: "",
-      category: "",
-      value: "",
-      id: 0,
-    };
-  },
-  //другая реализация
+  // data() {
+  //   return {
+  //     selected: "",
+  //     date: "",
+  //     category: "",
+  //     value: "",
+  //     id: 0,
+  //   };
+  // },
   watch: {
     $route() {
       // способ отслеживания изменения роутинга
@@ -65,7 +64,6 @@ export default {
     isEdited() {
       return this.$route.name === "edit";
     },
-    //другая реализация
     getRouteParams() {
       return {
         name: this.$route.name,
@@ -78,6 +76,7 @@ export default {
     ...mapActions("paymentsCategories", ["loadCategories"]),
     ...mapMutations("general", ["setFormVisible"]),
     ...mapMutations("payments", ["showPaymentsOnDisplay"]),
+    ...mapMutations("payments", ["setCurrentItem"]),
     onSaveClick() {
       const data = {
         value: +this.currentItem.value,
@@ -89,7 +88,9 @@ export default {
       // this.currentItem.date = this.currentItem.value = this.currentItem.category = "";
       this.setFormVisible(false);
       this.showPaymentsOnDisplay(this.page);
-      this.$router.push({ name: "home" });
+      if (this.$route.name !== "home") {
+        this.$router.name = "home";
+      }
     },
     getCoincidence() {
       return this.list.some((el) => el.category === this.$route.name);
@@ -107,6 +108,7 @@ export default {
     },
     editHandler() {
       this.setFormVisible(false);
+      this.setCurrentItem(this.item);
       this.$router.push({ name: "home" });
     },
   },
@@ -115,12 +117,12 @@ export default {
       this.loadCategories();
     }
     this.setParams();
-    if (this.isEdited) {
-      const { category, date, value } = this.currentItem;
-      this.date = date;
-      this.value = value;
-      this.selected = category;
-    }
+    // if (this.isEdited) {
+    //   const { category, date, value } = this.currentItem;
+    //   this.date = date;
+    //   this.value = value;
+    //   this.category = category;
+    // }
   },
 };
 </script>

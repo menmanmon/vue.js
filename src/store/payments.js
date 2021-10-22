@@ -4,8 +4,9 @@ const state = {
     paymentsList: [],
     allPaymentsListAsArray: [],
     activeList: [],
-    page: null,
+    page: 1,
     currentItem: {},
+    numberОfLinesPerSheet: 5,
 }
 
 const mutations = {
@@ -23,12 +24,14 @@ const mutations = {
         state.allPaymentsListAsArray = [].concat(...Object.values(payload));
     },
     showPaymentsOnDisplay(state, payload) {
-        state.page = payload;
-        state.activeList = state.allPaymentsListAsArray.slice(payload * 5, (payload + 1) * 5);
+        state.activeList = state.allPaymentsListAsArray.slice((payload -1) * state.numberОfLinesPerSheet, payload * state.numberОfLinesPerSheet);
     },
     setCurrentItem(state, item) {
         Vue.set(state, 'currentItem', item)
     },
+    defineCurrentPage(state, payload) {
+        state.page = payload
+    }
 }
 
 const getters = {
@@ -49,7 +52,7 @@ const actions = {
     },
     removeItem({ commit, state }, item) {
         const list = state.allPaymentsListAsArray.filter(el => el.id !== item.id)
-        commit('setActiveList', list.slice(0, 5))
+        commit('setActiveList', list.slice((state.page - 1) * state.numberОfLinesPerSheet, state.page * state.numberОfLinesPerSheet))
         commit('makeArray', list)
     },
 }

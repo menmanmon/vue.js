@@ -14,6 +14,12 @@ export default new VueRouter({
             props: true
         },
         {
+            path: '/edit',
+            name: 'edit',
+            component: () => import('../components/AddPaymentForm'),
+            props: true
+        },
+        {
             path: '/Food?value=:value',
             name: 'food',
             component: () => import('../components/AddPaymentForm'),
@@ -46,12 +52,6 @@ export default new VueRouter({
         {
             path: '/Entertainment', // дубль чтобы можно было переходить на эти роуты напрямую
             name: 'entertainment',
-            component: () => import('../components/AddPaymentForm'),
-            props: true
-        },
-        {
-            path: '/edit',
-            name: 'edit',
             component: () => import('../components/AddPaymentForm'),
             props: true
         },
