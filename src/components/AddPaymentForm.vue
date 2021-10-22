@@ -41,9 +41,9 @@ export default {
     $route() {
       // способ отслеживания изменения роутинга
       if (this.$route.name === "edit") {
-        this.currentItem.category = this.item.category;
-        this.currentItem.value = this.item.value;
-        this.currentItem.date = this.item.date;
+        this.currentItem.category;
+        this.currentItem.value;
+        this.currentItem.date;
       } else {
         this.currentItem.category = this.getRouteParams.name;
         this.currentItem.value = this.getRouteParams.params?.value;
@@ -109,7 +109,7 @@ export default {
     editHandler() {
       this.setFormVisible(false);
       this.setCurrentItem(this.item);
-      this.$router.push({ name: "home" });
+      this.$router.push({ name: "home", params: this.item });
     },
   },
   mounted() {

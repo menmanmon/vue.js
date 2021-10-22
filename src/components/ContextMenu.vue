@@ -28,7 +28,7 @@ export default {
     editHandler() {
       this.setFormVisible(true);
       if (this.$route.name !== "edit") {
-        this.$router.push({ name: "edit", querry: this.item });
+        this.$router.push({ name: "edit", params: this.item });
         this.setCurrentItem(this.item);
       }
       if (this.$route.name === "edit") {
