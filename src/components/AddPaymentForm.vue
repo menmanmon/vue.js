@@ -27,27 +27,13 @@ import { quickBTNs } from "../assets/selects";
 
 export default {
   name: "AddPaymentForm",
-  props: ["item"],
-  // data() {
-  //   return {
-  //     selected: "",
-  //     date: "",
-  //     category: "",
-  //     value: "",
-  //     id: 0,
-  //   };
-  // },
   watch: {
     $route() {
       // способ отслеживания изменения роутинга
-      if (this.$route.name === "edit") {
-        this.currentItem.category;
-        this.currentItem.value;
-        this.currentItem.date;
-      } else {
-        this.currentItem.category = this.getRouteParams.name;
+      if (this.$route.name !== "edit") {
+        this.currentItem.category = this.getRouteParams.params?.category;
         this.currentItem.value = this.getRouteParams.params?.value;
-        this.currentItem.date = this.getCurrentDate;
+        this.currentItem.date = this.getRouteParams.params?.date || this.getCurrentDate;
       }
     },
   },
@@ -57,6 +43,7 @@ export default {
     ...mapState("general", ["formVisible"]),
     ...mapState("payments", ["page"]),
     ...mapState("payments", ["currentItem"]),
+    ...mapState("payments", ["item"]),
     getCurrentDate,
     list() {
       return quickBTNs;
@@ -85,7 +72,6 @@ export default {
         id: this.allPaymentsListAsArray.length + 1,
       };
       this.addDataToAllPaymentsListAsArray(data);
-      // this.currentItem.date = this.currentItem.value = this.currentItem.category = "";
       this.setFormVisible(false);
       this.showPaymentsOnDisplay(this.page);
       if (this.$route.name !== "home") {
@@ -95,34 +81,29 @@ export default {
     getCoincidence() {
       return this.list.some((el) => el.category === this.$route.name);
     },
-    setParams() {
-      if (this.getCoincidence()) {
-        this.currentItem.date = this.getCurrentDate;
-        this.currentItem.value = this.$route.params?.value;
-        this.currentItem.category = this.$route.name;
-      } else {
-        this.currentItem.date = null;
-        this.currentItem.value = null;
-        this.currentItem.category = null;
-      }
-    },
+    // setParams() {
+    //   if (this.getCoincidence()) {
+    //     this.currentItem.date = this.getCurrentDate;
+    //     this.currentItem.value = this.$route.params?.value;
+    //     this.currentItem.category = this.$route.name;
+    //   } else {
+    //     this.currentItem.date = null;
+    //     this.currentItem.value = null;
+    //     this.currentItem.category = null;
+    //   }
+    // },
     editHandler() {
       this.setFormVisible(false);
       this.setCurrentItem(this.item);
-      this.$router.push({ name: "home", params: this.item });
+      this.$router.push({ name: "home", params: this.currentItem });
+      this.currentItem.category = this.currentItem.value = this.currentItem.date = "";
     },
   },
   mounted() {
     if (!this.getCategoryList.length) {
       this.loadCategories();
     }
-    this.setParams();
-    // if (this.isEdited) {
-    //   const { category, date, value } = this.currentItem;
-    //   this.date = date;
-    //   this.value = value;
-    //   this.category = category;
-    // }
+    // this.setParams();
   },
 };
 </script>

@@ -7,6 +7,7 @@ const state = {
     page: 1,
     currentItem: {},
     numberОfLinesPerSheet: 5,
+    item: null,
 }
 
 const mutations = {
@@ -24,13 +25,16 @@ const mutations = {
         state.allPaymentsListAsArray = [].concat(...Object.values(payload));
     },
     showPaymentsOnDisplay(state, payload) {
-        state.activeList = state.allPaymentsListAsArray.slice((payload -1) * state.numberОfLinesPerSheet, payload * state.numberОfLinesPerSheet);
+        state.activeList = state.allPaymentsListAsArray.slice((payload - 1) * state.numberОfLinesPerSheet, payload * state.numberОfLinesPerSheet);
     },
     setCurrentItem(state, item) {
         Vue.set(state, 'currentItem', item)
     },
     defineCurrentPage(state, payload) {
         state.page = payload
+    },
+    chengeItem(state, payload) {
+        state.item = payload
     }
 }
 

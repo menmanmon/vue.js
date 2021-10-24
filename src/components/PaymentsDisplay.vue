@@ -7,7 +7,12 @@
       <div class="fourthColumn">Value</div>
       <div>...</div>
     </div>
-    <div class="tableRow" v-for="item in activeList" v-bind:key="item.id">
+    <div
+      class="tableRow"
+      v-for="item in activeList"
+      v-bind:key="item.id"
+      @click="chengeItem(item)"
+    >
       <div class="firstColumn">{{ item.id }}</div>
       <div class="secondСolumn">{{ item.date }}</div>
       <div class="thirdColumn">{{ item.category }}</div>
@@ -15,7 +20,7 @@
       <div class="fifthColumn">
         <div @click="$modal.show(item)">...</div>
         <transition name="fade">
-        <ContextMenu v-if="item.id === activeID" :item="item" />
+          <ContextMenu v-if="item.id === activeID" :item="item" />
         </transition>
       </div>
     </div>
@@ -23,7 +28,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapMutations } from "vuex";
 import ContextMenu from "./ContextMenu.vue";
 
 export default {
@@ -45,6 +50,7 @@ export default {
     this.$modal.EventBus.$on("hide", this.onHide);
   },
   methods: {
+    ...mapMutations("payments", ["chengeItem"]),
     onShown(params) {
       this.activeID = params.id;
     },

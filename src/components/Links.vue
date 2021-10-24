@@ -7,7 +7,7 @@
         :key="item.category"
         @click="linkHandler(item)"
       >
-        {{ item.category }}: {{ item.params.value }}
+        {{ item.params.category }}: {{ item.params.value }}
       </button>
     </div>
   </div>
