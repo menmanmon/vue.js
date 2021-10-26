@@ -11,7 +11,7 @@
       class="tableRow"
       v-for="item in activeList"
       v-bind:key="item.id"
-      @click="chengeItem(item)"
+      @click="setCurrentItem(item)"
     >
       <div class="firstColumn">{{ item.id }}</div>
       <div class="secondСolumn">{{ item.date }}</div>
@@ -50,7 +50,7 @@ export default {
     this.$modal.EventBus.$on("hide", this.onHide);
   },
   methods: {
-    ...mapMutations("payments", ["chengeItem"]),
+    ...mapMutations("payments", ["setCurrentItem"]),
     onShown(params) {
       this.activeID = params.id;
     },

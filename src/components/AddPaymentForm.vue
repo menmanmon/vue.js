@@ -81,29 +81,16 @@ export default {
     getCoincidence() {
       return this.list.some((el) => el.category === this.$route.name);
     },
-    // setParams() {
-    //   if (this.getCoincidence()) {
-    //     this.currentItem.date = this.getCurrentDate;
-    //     this.currentItem.value = this.$route.params?.value;
-    //     this.currentItem.category = this.$route.name;
-    //   } else {
-    //     this.currentItem.date = null;
-    //     this.currentItem.value = null;
-    //     this.currentItem.category = null;
-    //   }
-    // },
     editHandler() {
       this.setFormVisible(false);
-      this.setCurrentItem(this.item);
-      this.$router.push({ name: "home", params: this.currentItem });
-      this.currentItem.category = this.currentItem.value = this.currentItem.date = "";
+      this.setCurrentItem({});
+      this.$router.push({ name: "home"});
     },
   },
   mounted() {
     if (!this.getCategoryList.length) {
       this.loadCategories();
     }
-    // this.setParams();
   },
 };
 </script>

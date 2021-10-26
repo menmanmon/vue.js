@@ -33,9 +33,6 @@ const mutations = {
     defineCurrentPage(state, payload) {
         state.page = payload
     },
-    chengeItem(state, payload) {
-        state.item = payload
-    }
 }
 
 const getters = {
