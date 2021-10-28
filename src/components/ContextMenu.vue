@@ -2,7 +2,7 @@
   <div class="context-menu">
     <div
       class="context-menu__item context-menu__item_edit"
-      @click.prevent="editHandler"
+      @click.prevent="editHandler(), showDialog()"
     >
       Edit
     </div>
@@ -20,7 +20,7 @@ import { mapActions, mapMutations, mapState } from "vuex";
 
 export default {
   name: "ModalWindow",
-  props: ["item"],
+  props: ["item", "dialog"],
   methods: {
     ...mapMutations("general", ["setFormVisible"]),
     ...mapMutations("payments", ["setCurrentItem"]),
@@ -37,8 +37,12 @@ export default {
       this.$modal.hide();
     },
     removeHandler() {
-      this.removeItem(this.item)
-      this.$modal.hide()
+      this.removeItem(this.item);
+      this.$modal.hide();
+    },
+    showDialog() {
+      this.dialog = true;
+      console.log(this.dialog);
     },
   },
   computed: {

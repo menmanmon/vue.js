@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="fillFormButton__container">
-      <button
-        class="fillFormButton"
+      <v-btn
+        class="fillFormButton mb-2 ml-2"
         v-for="item in list"
         :key="item.category"
         @click="linkHandler(item)"
       >
         {{ item.params.category }}: {{ item.params.value }}
-      </button>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -48,6 +48,5 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  margin-bottom: 10px;
 }
 </style>

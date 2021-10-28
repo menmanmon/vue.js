@@ -1,5 +1,5 @@
 <template>
-  <div class="paymentForm">
+  <!-- <div class="paymentForm">
     <div>
       <select v-model="currentItem.category">
         <option
@@ -13,11 +13,50 @@
     </div>
     <input class="inputValue" placeholder="Value" v-model="currentItem.value" />
     <input class="inputDate" placeholder="Date" v-model="currentItem.date" />
-    <button v-if="!isEdited" class="addButton" @click="onSaveClick">
+    <v-btn
+      :ripple="false"
+      v-if="!isEdited"
+      class="addButton"
+      @click="onSaveClick"
+    >
       ADD +
-    </button>
-    <button v-else class="addButton" @click="editHandler">Edit</button>
-  </div>
+    </v-btn>
+    <v-btn :ripple="false" v-else class="addButton" @click="editHandler"
+      >Edit</v-btn
+    >
+  </div> -->
+  <v-dialog max-width="500" v-model="dialog" :dialog="dialog">
+    <template v-slot:activator="{ on }">
+      <v-btn color="teal" dark v-on="on">
+        ADD NEW COST <v-icon>mdi-plus</v-icon>
+      </v-btn>
+    </template>
+    <v-card class="d-flex flex-column pa-9">
+      <v-select
+        v-model="currentItem.category"
+        :items="getCategoryList"
+        label="Category"
+      >
+      </v-select>
+      <v-text-field v-model="currentItem.value" label="Value"></v-text-field>
+      <v-text-field v-model="currentItem.date" label="Date"></v-text-field>
+      <v-btn
+        class="mb-2"
+        :ripple="false"
+        v-if="!isEdited"
+        @click="
+          onSaveClick();
+          hideDialog();
+        "
+      >
+        ADD +
+      </v-btn>
+      <v-btn class="mb-2" :ripple="false" v-else @click="editHandler"
+        >Edit</v-btn
+      >
+      <v-btn @click="hideDialog">Close</v-btn>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -27,13 +66,19 @@ import { quickBTNs } from "../assets/selects";
 
 export default {
   name: "AddPaymentForm",
+  data() {
+    return {
+      dialog: false,
+    };
+  },
   watch: {
     $route() {
       // способ отслеживания изменения роутинга
       if (this.$route.name !== "edit") {
         this.currentItem.category = this.getRouteParams.params?.category;
         this.currentItem.value = this.getRouteParams.params?.value;
-        this.currentItem.date = this.getRouteParams.params?.date || this.getCurrentDate;
+        this.currentItem.date =
+          this.getRouteParams.params?.date || this.getCurrentDate;
       }
     },
   },
@@ -84,7 +129,10 @@ export default {
     editHandler() {
       this.setFormVisible(false);
       this.setCurrentItem({});
-      this.$router.push({ name: "home"});
+      this.$router.push({ name: "home" });
+    },
+    hideDialog() {
+      this.dialog = false;
     },
   },
   mounted() {

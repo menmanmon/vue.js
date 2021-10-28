@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <!-- <div class="table">
     <div class="tableRow tableHeader">
       <div class="firstColumn">№</div>
       <div class="secondСolumn">Date</div>
@@ -24,7 +24,31 @@
         </transition>
       </div>
     </div>
-  </div>
+  </div> -->
+  <v-container>
+    <v-row>
+      <v-col :cols="1">№</v-col>
+      <v-col :cols="3">Date</v-col>
+      <v-col :cols="4">Category</v-col>
+      <v-col :cols="2">Value</v-col>
+      <v-col :cols="1">...</v-col>
+    </v-row>
+    <v-row
+      v-for="item in activeList"
+      v-bind:key="item.id"
+      @click="setCurrentItem(item)"
+    >
+      <v-col :cols="1">{{ item.id }}</v-col>
+      <v-col :cols="3">{{ item.date }}</v-col>
+      <v-col :cols="4">{{ item.category }}</v-col>
+      <v-col :cols="2">{{ item.value }}</v-col>
+      <v-col :cols="1" class="v-colFifth">
+        <div @click="$modal.show(item)" class="fifthColumn">...</div>
+        <transition name="fade">
+          <ContextMenu v-if="item.id === activeID" :item="item" /> </transition
+      ></v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -88,8 +112,10 @@ export default {
   width: 80px;
 }
 .fifthColumn {
-  position: relative;
   cursor: pointer;
+}
+.v-colFifth{
+  position: relative;
 }
 .fade-enter-active,
 .fade-leave-active {

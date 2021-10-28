@@ -1,5 +1,5 @@
 <template>
-  <div class="v-page">
+  <!-- <div class="v-page">
     <div
       class="v-page__number"
       @click="showPaymentsOnDisplay(item), defineCurrentPage(item)"
@@ -8,7 +8,17 @@
     >
       {{ item }}
     </div>
-  </div>
+  </div> -->
+  <v-footer class="v-page">
+    <div
+      class="v-page__number"
+      @click="showPaymentsOnDisplay(item), defineCurrentPage(item)"
+      v-for="(item, index) in pages"
+      :key="index"
+    >
+      {{ item }}
+    </div>
+  </v-footer>
 </template>
 
 <script>
@@ -19,7 +29,9 @@ export default {
     ...mapState("payments", ["allPaymentsListAsArray"]),
     ...mapState("payments", ["numberОfLinesPerSheet"]),
     pages() {
-      return Math.ceil(this.allPaymentsListAsArray.length / this.numberОfLinesPerSheet);
+      return Math.ceil(
+        this.allPaymentsListAsArray.length / this.numberОfLinesPerSheet
+      );
     },
   },
   methods: {
@@ -31,11 +43,8 @@ export default {
 
 <style>
 .v-page {
-  width: 500px;
   display: flex;
   justify-content: center;
-  margin: 10px 0;
-
 }
 .v-page__number {
   cursor: pointer;

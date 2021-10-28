@@ -1,12 +1,12 @@
 <template>
-  <v-app>
-    <v-app-bar flat>
-      <div class="text-h5 text-sm-h3 header">My personal costs</div>
-    </v-app-bar>
-    <v-main>
-      <Schedule class="mt-5" />
-    </v-main>
-  </v-app>
+  <div>
+    <header>
+      <div><h2>My personal costs</h2></div>
+    </header>
+    <main>
+      <Schedule />
+    </main>
+  </div>
 </template>
  
 <script>

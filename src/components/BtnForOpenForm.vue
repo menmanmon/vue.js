@@ -1,12 +1,16 @@
 <template>
-  <button class="openButton" @click="changeHandler">
-    {{ formVisible ? '- Hide' : '+ Show' }} Form
-  </button>
+  <v-btn
+    plain
+    :ripple="false"
+    class="openButton mb-2 mt-2 ml-2"
+    @click="changeHandler"
+  >
+    {{ formVisible ? "- Hide" : "+ Show" }} Form
+  </v-btn>
 </template>
 
 <script>
 import { mapState, mapMutations } from "vuex";
-
 
 export default {
   name: "BtnForOpenForm",
