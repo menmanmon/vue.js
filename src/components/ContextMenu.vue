@@ -2,7 +2,7 @@
   <div class="context-menu">
     <div
       class="context-menu__item context-menu__item_edit"
-      @click.prevent="editHandler(), showDialog()"
+      @click.prevent="editHandler(); showDialog()"
     >
       Edit
     </div>
