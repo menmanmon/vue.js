@@ -1,13 +1,9 @@
 const state = {
-    formVisible: false
+    formVisible: null,
 }
 const mutations = {
     setFormVisible(state, flag) {
-        if (flag !== undefined) {
-            state.formVisible = flag
-        } else {
-            state.formVisible = !state.formVisible
-        }
+        state.formVisible = flag
     }
 }
 

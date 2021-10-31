@@ -1,30 +1,4 @@
 <template>
-  <!-- <div class="table">
-    <div class="tableRow tableHeader">
-      <div class="firstColumn">№</div>
-      <div class="secondСolumn">Date</div>
-      <div class="thirdColumn">Category</div>
-      <div class="fourthColumn">Value</div>
-      <div>...</div>
-    </div>
-    <div
-      class="tableRow"
-      v-for="item in activeList"
-      v-bind:key="item.id"
-      @click="setCurrentItem(item)"
-    >
-      <div class="firstColumn">{{ item.id }}</div>
-      <div class="secondСolumn">{{ item.date }}</div>
-      <div class="thirdColumn">{{ item.category }}</div>
-      <div class="fourthColumn">{{ item.value }}</div>
-      <div class="fifthColumn">
-        <div @click="$modal.show(item)">...</div>
-        <transition name="fade">
-          <ContextMenu v-if="item.id === activeID" :item="item" />
-        </transition>
-      </div>
-    </div>
-  </div> -->
   <v-container>
     <v-row>
       <v-col :cols="1">№</v-col>

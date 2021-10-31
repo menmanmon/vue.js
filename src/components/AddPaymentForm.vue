@@ -1,33 +1,7 @@
 <template>
-  <!-- <div class="paymentForm">
-    <div>
-      <select v-model="currentItem.category">
-        <option
-          v-for="option in getCategoryList"
-          :value="option"
-          v-bind:key="option"
-        >
-          {{ option }}
-        </option>
-      </select>
-    </div>
-    <input class="inputValue" placeholder="Value" v-model="currentItem.value" />
-    <input class="inputDate" placeholder="Date" v-model="currentItem.date" />
-    <v-btn
-      :ripple="false"
-      v-if="!isEdited"
-      class="addButton"
-      @click="onSaveClick"
-    >
-      ADD +
-    </v-btn>
-    <v-btn :ripple="false" v-else class="addButton" @click="editHandler"
-      >Edit</v-btn
-    >
-  </div> -->
-  <v-dialog max-width="500" v-model="dialog" :dialog="dialog">
+  <v-dialog max-width="500" v-model="formVisible">
     <template v-slot:activator="{ on }">
-      <v-btn color="teal" dark v-on="on">
+      <v-btn color="teal" dark v-on="on" @click="setFormVisible(true)">
         ADD NEW COST <v-icon>mdi-plus</v-icon>
       </v-btn>
     </template>
@@ -40,21 +14,13 @@
       </v-select>
       <v-text-field v-model="currentItem.value" label="Value"></v-text-field>
       <v-text-field v-model="currentItem.date" label="Date"></v-text-field>
-      <v-btn
-        class="mb-2"
-        :ripple="false"
-        v-if="!isEdited"
-        @click="
-          onSaveClick();
-          hideDialog();
-        "
-      >
+      <v-btn class="mb-2" :ripple="false" v-if="!isEdited" @click="onSaveClick">
         ADD +
       </v-btn>
       <v-btn class="mb-2" :ripple="false" v-else @click="editHandler"
         >Edit</v-btn
       >
-      <v-btn @click="hideDialog">Close</v-btn>
+      <v-btn @click="setFormVisible(false)">Close</v-btn>
     </v-card>
   </v-dialog>
 </template>
@@ -106,6 +72,7 @@ export default {
   methods: {
     ...mapMutations("payments", ["addDataToAllPaymentsListAsArray"]),
     ...mapActions("paymentsCategories", ["loadCategories"]),
+    ...mapState("general", ["formVisible"]),
     ...mapMutations("general", ["setFormVisible"]),
     ...mapMutations("payments", ["showPaymentsOnDisplay"]),
     ...mapMutations("payments", ["setCurrentItem"]),
@@ -127,7 +94,7 @@ export default {
       return this.list.some((el) => el.category === this.$route.name);
     },
     editHandler() {
-      this.setFormVisible(false);
+      this.setFormVisible();
       this.setCurrentItem({});
       this.$router.push({ name: "home" });
     },

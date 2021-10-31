@@ -1,14 +1,4 @@
 <template>
-  <!-- <div class="v-page">
-    <div
-      class="v-page__number"
-      @click="showPaymentsOnDisplay(item), defineCurrentPage(item)"
-      v-for="(item, index) in pages"
-      :key="index"
-    >
-      {{ item }}
-    </div>
-  </div> -->
   <v-footer class="v-page">
     <div
       class="v-page__number"
