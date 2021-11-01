@@ -72,7 +72,6 @@ export default {
   methods: {
     ...mapMutations("payments", ["addDataToAllPaymentsListAsArray"]),
     ...mapActions("paymentsCategories", ["loadCategories"]),
-    ...mapState("general", ["formVisible"]),
     ...mapMutations("general", ["setFormVisible"]),
     ...mapMutations("payments", ["showPaymentsOnDisplay"]),
     ...mapMutations("payments", ["setCurrentItem"]),
@@ -94,7 +93,7 @@ export default {
       return this.list.some((el) => el.category === this.$route.name);
     },
     editHandler() {
-      this.setFormVisible();
+      this.setFormVisible(false);
       this.setCurrentItem({});
       this.$router.push({ name: "home" });
     },

@@ -42,7 +42,6 @@ export default {
     },
     showDialog() {
       this.dialog = true;
-      console.log(this.dialog);
     },
   },
   computed: {
